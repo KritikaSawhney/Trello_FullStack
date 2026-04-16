@@ -4,6 +4,13 @@ A full-stack Kanban-style project management application built from scratch, ins
 
 ---
 
+## 🌐 Live Demo
+
+- **Frontend (Vercel):** [https://trello-full-stack.vercel.app/](https://trello-full-stack.vercel.app/)
+- **Backend (Render):** [https://trello-fullstack-1.onrender.com](https://trello-fullstack-1.onrender.com)
+
+---
+
 ## 🚀 Tech Stack
 
 | Layer | Technology |
