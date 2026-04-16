@@ -24,6 +24,19 @@ A full-stack Kanban-style project management application built from scratch, ins
 
 ---
 
+## 📊 Database Architecture
+
+The application uses a custom-designed **Relational MySQL Schema** (available in `backend/src/db/schema.sql`) to ensure data integrity and performance. 
+
+- **Relational Integrity**: Strict Foreign Key constraints (`ON DELETE CASCADE`) manage relationships between Boards, Lists, Cards, Checklists, and Comments.
+- **Many-to-Many Relationships**: Implemented junction tables for `card_labels` and `card_members` to support complex task organization and team collaboration.
+- **Performance Optimization**: 
+  - B-Tree Indexes on all parent-child relationship columns for lightning-fast lookups.
+  - **Full-Text Indexing** on `cards.title` to power efficient real-time filtering.
+- **Production Choice**: I migrated the local schema to a **Managed Cloud MySQL instance** for deployment. This ensures that the live demo is persistent and reflects professional-grade infrastructure choices.
+
+---
+
 ## 📋 Features Implemented
 
 ### Core Features (All ✅)
