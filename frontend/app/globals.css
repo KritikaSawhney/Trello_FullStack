@@ -1,0 +1,429 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Trello-inspired design system */
+:root {
+  --trello-blue: #0079BF;
+  --trello-blue-dark: #026AA7;
+  --trello-blue-hover: #005f96;
+  --header-bg: #026AA7;
+  --card-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+  --card-hover-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #f0f2f5;
+  color: #172b4d;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.35);
+}
+
+/* Board page background fills full viewport */
+.board-bg {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+/* List column */
+.list-column {
+  background: #ebecf0;
+  border-radius: 12px;
+  min-width: 272px;
+  max-width: 272px;
+  max-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(9,30,66,.2);
+}
+
+.list-column:hover {
+  box-shadow: 0 2px 8px rgba(9,30,66,.15);
+}
+
+/* Card */
+.kanban-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.kanban-card:hover {
+  box-shadow: var(--card-hover-shadow);
+  transform: translateY(-1px);
+}
+
+/* Card cover strip */
+.card-cover {
+  height: 36px;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Label pill */
+.label-pill {
+  display: inline-block;
+  height: 8px;
+  min-width: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: filter 0.15s ease, min-width 0.2s ease;
+}
+
+.label-pill:hover {
+  filter: brightness(0.85);
+  min-width: 56px;
+}
+
+/* Label pill large (in modal) */
+.label-pill-lg {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.label-pill-lg:hover { filter: brightness(0.88); }
+
+/* Member avatar */
+.member-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border: 2px solid #fff;
+}
+
+.member-avatar:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+}
+
+.member-avatar-lg {
+  width: 36px;
+  height: 36px;
+  font-size: 13px;
+}
+
+/* Checklist progress bar */
+.checklist-bar-bg {
+  height: 8px;
+  background: #dfe1e6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.checklist-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: #61bd4f;
+  transition: width 0.3s ease;
+}
+
+.checklist-bar-fill.complete {
+  background: #61bd4f;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 16px;
+  overflow-y: auto;
+}
+
+.modal-container {
+  background: #f4f5f7;
+  border-radius: 16px;
+  width: 768px;
+  max-width: 100%;
+  min-height: 400px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header bar */
+.app-header {
+  background: var(--header-bg);
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  gap: 8px;
+  box-shadow: 0 1px 0 rgba(9,30,66,0.13);
+}
+
+/* Button variants */
+.btn-primary {
+  background: #0079BF;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-primary:hover { background: #026aa7; }
+
+.btn-ghost {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: #172b4d;
+  transition: background 0.12s;
+}
+.btn-ghost:hover { background: rgba(9,30,66,0.08); }
+
+.btn-danger {
+  background: #eb5a46;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-danger:hover { background: #c9372c; }
+
+/* Input styles */
+.tf-input {
+  width: 100%;
+  border: 2px solid #dfe1e6;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #172b4d;
+  background: #fafbfc;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+
+.tf-input:focus {
+  border-color: #0079bf;
+  box-shadow: 0 0 0 3px rgba(0,121,191,0.18);
+  background: #fff;
+}
+
+.tf-textarea {
+  width: 100%;
+  border: 2px solid #dfe1e6;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #172b4d;
+  background: #fafbfc;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+
+.tf-textarea:focus {
+  border-color: #0079bf;
+  box-shadow: 0 0 0 3px rgba(0,121,191,0.18);
+  background: #fff;
+}
+
+/* Section heading in modal */
+.modal-section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5e6c84;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+/* Drag-over indicator */
+.drag-over-indicator {
+  background: rgba(0,121,191,0.12) !important;
+  border: 2px dashed #0079bf !important;
+}
+
+/* Add card button */
+.add-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 12px;
+  color: #5e6c84;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-align: left;
+  transition: background 0.12s, color 0.12s;
+}
+.add-card-btn:hover {
+  background: rgba(9,30,66,0.09);
+  color: #172b4d;
+}
+
+/* Fade animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in { animation: fadeIn 0.2s ease; }
+
+/* Due date badge */
+.due-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.due-overdue {
+  background: #eb5a46;
+  color: white;
+}
+
+.due-soon {
+  background: #f2d600;
+  color: #172b4d;
+}
+
+.due-ok {
+  background: #ebecf0;
+  color: #5e6c84;
+}
+
+/* Search bar */
+.search-bar {
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 6px;
+  padding: 5px 10px;
+  color: white;
+  font-size: 13px;
+  width: 180px;
+  transition: width 0.2s, background 0.2s;
+  outline: none;
+}
+
+.search-bar::placeholder { color: rgba(255,255,255,0.8); }
+
+.search-bar:focus {
+  width: 260px;
+  background: white;
+  color: #172b4d;
+}
+
+.search-bar:focus::placeholder { color: #aaa; }
+
+/* Board card on home page */
+.board-card {
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.board-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.15s;
+}
+
+.board-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.board-card:hover::before {
+  background: rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .modal-container {
+    margin: 8px;
+    border-radius: 12px;
+  }
+  .list-column {
+    min-width: 240px;
+    max-width: 240px;
+  }
+}
