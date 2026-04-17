@@ -51,6 +51,17 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Trello Clone Backend running on http://localhost:${PORT}`);
+  
+  // Keep-alive heartbeat to prevent Aiven hibernation (runs every 30 mins)
+  const db = require('./src/config/db');
+  setInterval(async () => {
+    try {
+      await db.query('SELECT 1');
+      console.log('💓 Database keep-alive heartbeat sent');
+    } catch (err) {
+      console.error('💔 Keep-alive heartbeat failed:', err.message);
+    }
+  }, 30 * 60 * 1000); 
 });
 
 module.exports = app;

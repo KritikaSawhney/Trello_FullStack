@@ -21,8 +21,17 @@ pool.getConnection()
     conn.release();
   })
   .catch(err => {
-    console.error('❌ MySQL connection error:', err.message);
-    process.exit(-1);
+    console.error('❌ SQL CONNECTION ERROR:', {
+      message: err.message,
+      code: err.code,
+      hostname: process.env.DB_HOST,
+      type: err.name
+    });
+    
+    console.warn('⚠️ Server will exit in 5 seconds to allow cloud logs to synchronize...');
+    setTimeout(() => {
+      process.exit(1);
+    }, 5000);
   });
 
 module.exports = {

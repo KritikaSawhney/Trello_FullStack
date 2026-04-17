@@ -139,6 +139,17 @@ Set up a managed MySQL database via a cloud provider like **Aiven**, **Clever Cl
 - **No authentication required** — Default user "Alice Johnson" is pre-set as the logged-in member.
 - **Sample data** — Pre-seeded with realistic task workflows, including members, multiple lists, tasks, labels, and checklists.
 
+
+---
+
+## 🛠️ Troubleshooting
+
+### Render "Exit Status 255"
+If your backend fails to start on Render with exit code 255, it almost always means the database is unreachable. 
+- **Cause**: Aiven free tier services are automatically "Powered Off" after a period of inactivity.
+- **Fix**: Log in to the Aiven Console and ensure your MySQL service is **Running**.
+- **Diagnostic Tool**: Run `npm run test-db` in the `backend` folder to verify your connection string and credentials locally before deploying to Render.
+
 ---
 
 ## 👨‍💻 Author
